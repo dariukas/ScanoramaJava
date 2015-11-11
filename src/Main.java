@@ -26,14 +26,15 @@ public class Main {
 	 */
 
 	public static void main(String[] args) {
+		FileController.main();
 		try {
 			//runNOUVELLE_AMIE();
 			//run();
 			//FrmPowerpoint.run();
 		    //run2015();
-			runReformat();
+			//runReformat();
 			//docRun();
-			//runTest();
+			runTest();
 		} catch (IOException e) {
 			System.out.println("Nerastas failas!");
 		}
@@ -91,13 +92,15 @@ public class Main {
 	
 	//reformats the titles to the main format or to stl
 	static void runReformat()throws IOException{
-		String fileTitle = "OneFloorBelow";
+		String fileTitle = "14plus";
 		String fileNameBase = "/Users/kristinaslekyte/Desktop/Scanorama/";
 		String fileNameEnd = ".txt";
 		String fileNameIn = fileNameBase + fileTitle + fileNameEnd;
 		String fileNameOut = fileNameBase + fileTitle + "_mod" + fileNameEnd;
 
 		File fin = new File(fileNameIn);
+		
+		FileController.main();
 		
         boolean sort = STL.detectSequenceErrors(ToPowerpoint.titlesToMap(fin));	
 		if(sort == true){
@@ -106,6 +109,23 @@ public class Main {
 			ToPowerpoint.mapToFile(ToPowerpoint.titlesToMap(fin), fileNameOut);
 		}
 		//STL.mapToSTLFile(ToPowerpoint.titlesToMap(fin), fileNameOut);		
+	}
+	
+	//reformats the titles to the main format or to stl
+	static void runReformat(String path)throws IOException{
+		String fileNameIn = path;
+		String fileNameOut = path.replace(".txt", "_mod.txt");
+
+		File fin = new File(fileNameIn);
+		
+		FileController.main();
+		
+        boolean sort = STL.detectSequenceErrors(ToPowerpoint.titlesToMap(fin));	
+		if(sort == true){
+			ToPowerpoint.mapToFile(STL.correctSequenceErrors(ToPowerpoint.titlesToMap(fin)), fileNameOut);
+		} else {
+			ToPowerpoint.mapToFile(ToPowerpoint.titlesToMap(fin), fileNameOut);
+		}		
 	}
 
 	static void run2015() throws IOException{	
