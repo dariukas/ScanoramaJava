@@ -91,18 +91,23 @@ public class Main {
 	
 	//reformats the titles to the main format or to stl
 	static void runReformat()throws IOException{
-		String fileTitle = "PriesGamta2";
+		String fileTitle = "OneFloorBelow";
 		String fileNameBase = "/Users/kristinaslekyte/Desktop/Scanorama/";
 		String fileNameEnd = ".txt";
 		String fileNameIn = fileNameBase + fileTitle + fileNameEnd;
 		String fileNameOut = fileNameBase + fileTitle + "_mod" + fileNameEnd;
-		
+
 		File fin = new File(fileNameIn);
-		STL.detectSequenceErrors(ToPowerpoint.titlesToMap(fin));
-		ToPowerpoint.mapToFile(ToPowerpoint.titlesToMap(fin), fileNameOut);
+		
+        boolean sort = STL.detectSequenceErrors(ToPowerpoint.titlesToMap(fin));	
+		if(sort == true){
+			ToPowerpoint.mapToFile(STL.correctSequenceErrors(ToPowerpoint.titlesToMap(fin)), fileNameOut);
+		} else {
+			ToPowerpoint.mapToFile(ToPowerpoint.titlesToMap(fin), fileNameOut);
+		}
 		//STL.mapToSTLFile(ToPowerpoint.titlesToMap(fin), fileNameOut);		
 	}
-	
+
 	static void run2015() throws IOException{	
         String fileTitle = "Atleidimas";
 		String fileNameBase = "/Users/kristinaslekyte/Desktop/Scanorama/";

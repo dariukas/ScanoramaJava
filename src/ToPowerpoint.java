@@ -231,6 +231,10 @@ public class ToPowerpoint {
 			line = br.readLine();
 			TextManipulation.printUnicodes(line);
 		*/
+			
+			line= line.replaceAll("\\ufffd", "");
+			line =line.replaceAll("\\0000", "");
+			
 			//System.out.println(line);
 			Matcher numberMatcher = Pattern.compile("^[0-9]{1,4}+").matcher(line);
 			//possible problem if the title starts with the year
@@ -322,6 +326,10 @@ public static List<String> filesRead2015(File fin) throws IOException {
 		line = br.readLine();
 		TextManipulation.printUnicodes(line);*/
 		
+		//some hidden symbols
+		//line= line.replaceAll("\\ufffd", "");
+		//line =line.replaceAll("\\0000", "");
+		
 		 //ManoSesute, PublicAffair
 		//Matcher mDigit = Pattern.compile("^[0-9]").matcher(line);
 		
@@ -331,7 +339,7 @@ public static List<String> filesRead2015(File fin) throws IOException {
 		//String timeStamp=":[0-9]{2}+\\u0009[0-9]{2}+:[0-9]{2}+:[0-9]{2}+:[0-9]{2}+";
 		//PriesGamta
 		//String timeStamp="0[0-9]{3}";
-		//SauliausSunus, JaunojoEdoBedos, Banga, Bitlai	:21[space]01:00:35:21
+		//SauliausSunus, JaunojoEdoBedos, Banga, Bitlai, VirginMountain	:21[space]01:00:35:21
 		//String timeStamp = ":[0-9]{2}+\\u0020[0-9]{2}+:[0-9]{2}+:[0-9]{2}+:[0-9]{2}+"; 
 	    //ManoSesute, PublicAffair ,640 --> 00:01:09,640
 		//String timeStamp = "\\u003e\\u0020[0-9]{2}+:[0-9]{2}+:[0-9]{2}+\\u002c[0-9]{3}+";
@@ -339,7 +347,7 @@ public static List<String> filesRead2015(File fin) throws IOException {
 	    //String timeStamp = "\\u002e[0-9]{2}+\\u0020\\u0020[0-9]{2}+:[0-9]{2}+:[0-9]{2}+\\u002e[0-9]{2}+";
 		//Atleidimas .01 <01:01:03.13
 		String timeStamp="\\u003c[0-9]{2}+:[0-9]{2}+:[0-9]{2}+\\u002e[0-9]{2}+";
-		
+
 		Matcher timeStampMatcher = Pattern.compile(timeStamp).matcher(line);
 		if (timeStampMatcher.find()){
 			texts.add(text.trim());
